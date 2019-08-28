@@ -21,3 +21,5 @@ O que você deverá fazer é implementar programas com alguma dessas estratégia
 * __forward_player__ : always moves the piece that is in a biggest row number and try to capture whenever possible
 
 * __mirror_player__ : whenever possible try to make the same move as your opponent
+
+* __team_player__ : moves a piece following the neighbours and capturing whenever possible

@@ -85,11 +85,12 @@ def flip_board(lines, columns, white_positions, black_positions):
     return lines, columns, new_white, new_black
 
 
-def game(player1, player2, lines, columns, white_positions, black_positions):
+def game(player1, player2, display_board, lines, columns, white_positions, black_positions):
     winners      = [0, 0]
     tabuleiro    = [lines, columns, white_positions, black_positions]
 
-    #draw_board(*tabuleiro)
+    if display_board:
+        draw_board(*tabuleiro)
 
     while True :
         ## Player 1
@@ -98,8 +99,8 @@ def game(player1, player2, lines, columns, white_positions, black_positions):
             winners[1] += 1
             break
 
-        #print("white move = " + str(move))
-        #draw_board(*tabuleiro)             
+        if display_board:
+            draw_board(*tabuleiro)             
         
         if move[1][0] == tabuleiro[0] :
             winners[0] += 1
@@ -114,8 +115,8 @@ def game(player1, player2, lines, columns, white_positions, black_positions):
             break
         tabuleiro = flip_board(*tabuleiro)    
         
-        #print("black move = " + str(move))
-        #draw_board(*tabuleiro) 
+        if display_board:
+            draw_board(*tabuleiro) 
 
         if move[1][0] == tabuleiro[0] :
             winners[1] += 1
@@ -125,12 +126,11 @@ def game(player1, player2, lines, columns, white_positions, black_positions):
 
 
 def game_matches(player1, player2, random_game = False):
-    
     n_matches = int(input("Number of matches: "))
     total = [0, 0]
     for i in range(0, n_matches):
         print("playing game %d"%i, end=" => ")
-        result = game(player1, player2, *generate_game(random_game))
+        result = game(player1, player2, False, *generate_game(random_game))
         print(result)
         total[0] += result[0]
         total[1] += result[1]

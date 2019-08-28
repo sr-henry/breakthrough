@@ -127,7 +127,6 @@ def evil_player(lines, columns, white_positions, black_positions):
     return move
 
 
-
 def forward_player(lines, columns, white_positions, black_positions):
     move = []
     board = [lines, columns, white_positions, black_positions]
@@ -154,11 +153,8 @@ def forward_player(lines, columns, white_positions, black_positions):
 def mirror_player(lines, columns, white_positions, black_positions):
     move = []
     board = [lines, columns, white_positions, black_positions]
-
     mirrored = flip_board(*board)
-
     mirror_moves = []
-
     possible_moves = get_possible_moves(*board)
 
     if possible_moves:
@@ -174,7 +170,35 @@ def mirror_player(lines, columns, white_positions, black_positions):
 
     return move
 
-#print(mirror_player(*generate_game()))
+
+def team_player(lines, columns, white_positions, black_positions):
+    move = []
+    board = [lines, columns, white_positions, black_positions]
+    possible_moves = get_possible_moves(*board)
+    best_moves = []
+
+    if possible_moves:
+        for current in possible_moves:
+            if (current[0][0] + 1, current[0][1] + 1) in white_positions:
+                best_moves.append(current)
+            if (current[0][0] + 1, current[0][1]) in white_positions:
+                best_moves.append(current)
+            if (current[0][0] + 1, current[0][1] - 1) in white_positions:
+                best_moves.append(current)
+            if (current[0][0] + 1, current[0][1] + 1) in black_positions:
+                return current  
+            if (current[0][0] + 1, current[0][1] - 1) in black_positions:
+                return current  
+        
+        if best_moves:
+            index = random.randint(0, abs(len(best_moves) - 1))
+            move = possible_moves[index]
+        else:
+            index = random.randint(0, abs(len(possible_moves) - 1))
+            move = possible_moves[index]
+
+    return move
 
 
-game_matches(random_player, mirror_player)
+game(random_player, team_player, True, *generate_game())
+#game_matches(team_player, mirror_player)
