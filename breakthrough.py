@@ -127,20 +127,54 @@ def evil_player(lines, columns, white_positions, black_positions):
     return move
 
 
-def new_player(lines, columns, white_positions, black_positions):
+
+def forward_player(lines, columns, white_positions, black_positions):
     move = []
     board = [lines, columns, white_positions, black_positions]
     
-    for move in get_possible_moves(*board):
-        pass
+    possible_moves = get_possible_moves(*board)
+
+    max_line = 0
+    best_move = []
+
+    if possible_moves:
+        for current_move in possible_moves:
+            current_line = current_move[0][0]
+            if current_line > max_line:
+                max_line = current_line
+                best_move = current_move
+                if best_move[1] in black_positions:
+                    return best_move
+
+        return best_move
 
     return move
 
 
+def mirror_player(lines, columns, white_positions, black_positions):
+    move = []
+    board = [lines, columns, white_positions, black_positions]
 
-def main():
-    ## game_matches(random_player, evil_player)
-    new_player(*generate_game())
+    mirrored = flip_board(*board)
+
+    mirror_moves = []
+
+    possible_moves = get_possible_moves(*board)
+
+    if possible_moves:
+        for current in possible_moves:
+            if current[1] in mirrored[2]:
+                mirror_moves.append(current)
+        if mirror_moves:
+            index = random.randint(0, abs(len(mirror_moves) - 1))
+            move = mirror_moves[index]
+        else:
+            index = random.randint(0, abs(len(possible_moves) - 1))
+            move = possible_moves[index]
+
+    return move
+
+#print(mirror_player(*generate_game()))
 
 
-main()
+game_matches(random_player, mirror_player)
