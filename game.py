@@ -126,12 +126,12 @@ def game(player1, player2, display_board, lines, columns, white_positions, black
 
 
 def game_matches(player1, player2, random_game = False):
-    n_matches = int(input("Number of matches: "))
+    n_matches = 100#int(input("Number of matches: "))
     total = [0, 0]
     for i in range(0, n_matches):
-        print("playing game %d"%i, end=" => ")
+        #print("playing game %d"%i, end=" => ")
         result = game(player1, player2, False, *generate_game(random_game))
-        print(result)
+        #print(result)
         total[0] += result[0]
         total[1] += result[1]
     print(total)

@@ -14,12 +14,28 @@ O que você deverá fazer é implementar programas com alguma dessas estratégia
 
 
 ## Players
-* __dump_player__ : calculate board squares values, making a move that try to get a biggest value
+* __dump_player__ : calculate the square values of the board, perform a move that tries to get a square with the highest value
 
-* __evil_player__ : get a game score by evaluation function, making a move for get a biggest game score
+* __evil_player__ : calculates the game score by the evaluation function, performing the move that gets the highest score in that state
 
-* __forward_player__ : always moves the piece that is in a biggest row number and try to capture whenever possible
+* __forward_player__ : always move the piece that is in the rows with the highest index and try to capture whenever possible
 
-* __mirror_player__ : whenever possible try to make the same move as your opponent
+* __mirror_player__ : whenever possible, try to make the same move as your opponent
 
-* __team_player__ : moves a piece following the neighbours and capturing whenever possible
+* __team_player__ : moves a piece following the neighbors and capturing whenever possible
+
+* __killer_palyer__ : calculates the shortest distance for an opponent in order to eliminate it
+
+* __zigzag_player__ : moves only across the diagonals alternately, capturing whenever possible
+
+* __dodge_player__ :
+
+* __conn_player__ :
+
+* __sup_player__ :
+
+## Results
+
+Whites | Blacks | Results |
+-------|--------|---------|
+dump_player | 
