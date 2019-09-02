@@ -38,7 +38,7 @@ O que você deverá fazer é implementar programas com alguma dessas estratégia
 
 Whites |
 -------|
-|player |teste |
+o|player |teste |
 dump_player | | |
 evil_player | | |
 forward_player | | |
