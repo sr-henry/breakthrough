@@ -35,7 +35,9 @@ O que você deverá fazer é implementar programas com alguma dessas estratégia
 * __sup_player__ : check if the destination house is defended by allies, if it is, performes the move
 
 ## Results
--------|--------|---------|
+
+Whites |
+-------|
 dump_player | | |
 evil_player | | |
 forward_player | | |
