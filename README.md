@@ -28,14 +28,23 @@ O que você deverá fazer é implementar programas com alguma dessas estratégia
 
 * __zigzag_player__ : moves only across the diagonals alternately, capturing whenever possible
 
-* __dodge_player__ :
+* __dodge_player__ : checks if the destination square is occupied and defended, if not defended moves to it
 
-* __conn_player__ :
+* __conn_player__ : calculates the connectivity of the pieces by performing the movement that will assign a higher connectivity value
 
-* __sup_player__ :
+* __sup_player__ : check if the destination house is defended by allies, if it is, performes the move
 
 ## Results
 
 Whites | Blacks | Results |
 -------|--------|---------|
-dump_player | 
+dump_player | | |
+evil_player | | |
+forward_player | | |
+mirror_player | | |
+team_player | | |
+killer_player | | |
+zigzag_player | | |
+dodge_player | | |
+conn_player | | |
+sup_player | | |

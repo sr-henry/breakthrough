@@ -83,7 +83,6 @@ def evaluation(lines, columns, white_positions, black_positions):
     black_positions_blocked = len(black_positions) - len(black_origins) 
     blocks = white_positions_blocked - black_positions_blocked    
 
-    ## Isolated Pieces
     ## Connectivity
 
     ## Evaluation
@@ -326,21 +325,3 @@ def sup_player(lines, columns, white_positions, black_positions):
 
     return selected_moves
 
-
-players = [dump_player,evil_player,forward_player,mirror_player,team_player,killer_player,zigzag_player,dodge_player,conn_player,sup_player]
-
-
-for player in players:
-    print(str(player))
-    game_matches(player, random_player)
-    game_matches(player, dump_player)
-    game_matches(player, evil_player)
-    game_matches(player, forward_player)
-    game_matches(player, mirror_player)
-    game_matches(player, team_player)
-    game_matches(player, killer_player)
-    game_matches(player, zigzag_player)
-    game_matches(player, dodge_player)
-    game_matches(player, conn_player)
-    game_matches(player, sup_player)
-    print()

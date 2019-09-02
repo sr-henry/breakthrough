@@ -1,5 +1,6 @@
 import random
 
+
 def draw_board(lines, columns, white_positions, black_positions):
     for r in range(lines, 0, -1):
         print(r, end = " ")
@@ -14,7 +15,6 @@ def draw_board(lines, columns, white_positions, black_positions):
     print("  ", end = "")
     for x in range(1, columns + 1):
         print(x, end = " ")
-    print("\n========================================")
 
 
 def valid_move(move, lines, columns, white_positions, black_positions) :
