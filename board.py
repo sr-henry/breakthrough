@@ -1,3 +1,5 @@
+import random
+
 class Board:
     def __init__(self, lines, columns):
         self.lines = lines
@@ -12,21 +14,49 @@ class Board:
             #self.black_positions.append((self.lines - 1, c))
 
 
+    def generate_random_position(self):
+        self.white_positions.clear()
+        self.black_positions.clear()
+
+        middle_rows = int(self.lines/2)
+        middle_columns = int(self.columns/2)
+        half_area = middle_rows * middle_columns
+        n_pieces = random.randint(2, half_area)
+
+        wp = 0
+        while wp <= n_pieces:
+            row = random.randint(1, middle_rows)
+            column = random.randint(1, self.columns)
+            position = (row, column)
+            if position not in self.white_positions:
+                self.white_positions.append(position)
+                wp += 1
+
+        bp = 0
+        while bp <= n_pieces:
+            row = random.randint(middle_rows, self.lines)
+            column = random.randint(1, self.columns)
+            position = (row, column)
+            if position not in self.black_positions:
+                self.black_positions.append(position)
+                bp += 1
+
+
     def display(self):
         for r in range(self.lines, 0, -1):
             print(r, end = " ")
             for c in range(1, self.columns + 1):
                 if (r, c) in self.white_positions:
-                    print("W", end = " ")
+                    print("w", end = " ")
                 elif (r, c) in self.black_positions:
-                    print("B", end = " ")
+                    print("b", end = " ")
                 else:
                     print(".", end = " ")
             print()
         print("  ", end = "")
         for x in range(1, self.columns + 1):
             print(x, end = " ")
-        print()
+        print("\n\n")
 
 
     def white_valid_move(self, move):
@@ -184,7 +214,7 @@ class Board:
         return score
 
 
-    def over(self):
+    def game_is_over(self):
         for wp in self.white_positions:
             if wp[0] == self.lines:
                 return True
@@ -192,5 +222,18 @@ class Board:
         for bp in self.black_positions:
             if bp[0] == 1:
                 return True
-        
+
         return False
+    
+
+    def turn(self):
+        new_white = []
+        new_black = []
+        
+        for coord in self.black_positions :
+            new_white.append((self.lines-coord[0]+1, self.columns-coord[1]+1))
+        for coord in self.white_positions :
+            new_black.append(( self.lines-coord[0]+1, self.columns-coord[1]+1))
+        
+        self.white_positions = new_white
+        self.black_positions = new_black
