@@ -6,12 +6,13 @@ class Board:
         self.columns = columns
         self.white_positions = []
         self.black_positions = []
+        self.board_turn = 1
 
         for c in range(1, self.columns + 1):
             self.white_positions.append((1, c))
-            #self.white_positions.append((2, c))
+            self.white_positions.append((2, c))
             self.black_positions.append((self.lines, c))
-            #self.black_positions.append((self.lines - 1, c))
+            self.black_positions.append((self.lines - 1, c))
 
 
     def generate_random_position(self):
@@ -185,36 +186,8 @@ class Board:
             self.white_positions.remove(destino)
         return True
 
-    
-    def evaluation(self):
-        ## Value of Pieces
-        value_pieces = 0
-        for v in range(1, self.lines + 1):
-            pieces_w = list(filter(lambda pos: pos[0] == v, self.white_positions))
-            pieces_b = list(filter(lambda pos: pos[0] == (9 - v), self.black_positions))
-            value_pieces += v*(len(pieces_w) - len(pieces_b))
 
-        ## Mobility (the number of legal moves)
-        white_legal_moves = self.white_possible_moves()
-        black_legal_moves = self.black_possible_moves()
-        mobility = len(white_legal_moves) - len(black_legal_moves)
-
-        ## Blocked Pieces
-        white_origins = set(map(lambda move: move[0], white_legal_moves))
-        black_origins = set(map(lambda move: move[0], black_legal_moves))
-        white_positions_blocked = len(self.white_positions) - len(white_origins)
-        black_positions_blocked = len(self.black_positions) - len(black_origins) 
-        blocks = white_positions_blocked - black_positions_blocked    
-
-        ## Connectivity
-
-        ## Evaluation
-        score = value_pieces + .2*mobility - .5*blocks
-
-        return score
-
-
-    def game_is_over(self):
+    def is_game_over(self):
         for wp in self.white_positions:
             if wp[0] == self.lines:
                 return True
@@ -237,3 +210,13 @@ class Board:
         
         self.white_positions = new_white
         self.black_positions = new_black
+        self.board_turn *= -1
+
+    def simulate_move(self, move):
+        b = Board(self.lines, self.columns)
+        b.white_positions.clear()
+        b.white_positions = self.white_positions
+        b.black_positions.clear()
+        b.black_positions = self.black_positions
+        b.perform_white_move(move)
+        return b
