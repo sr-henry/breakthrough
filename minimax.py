@@ -37,7 +37,7 @@ def evaluation(board):
         ## Mobility (the number of legal moves)
         white_legal_moves = board.white_possible_moves()
         black_legal_moves = board.black_possible_moves()
-        value += 0.3*(len(white_legal_moves) - len(black_legal_moves))
+        value += 0.1*(len(white_legal_moves) - len(black_legal_moves))
 
         ## Blocked Pieces
         white_origins = set(map(lambda move: move[0], white_legal_moves))
@@ -56,11 +56,10 @@ def computer_minimax(board, depth, maximizing, memo):
         return evaluation(board), None
     
     best_move = None
-    scored_moves = {}
+    best_score = None
 
     if maximizing:
         for move in board.white_possible_moves():
-
             if move[1][0] == board.lines:
                 return 99999, move
 
@@ -69,18 +68,21 @@ def computer_minimax(board, depth, maximizing, memo):
 
             if nboard not in memo.keys():
                 current_score, _ = computer_minimax(nboard, depth-1, False, memo)
-                scored_moves[move] = current_score
                 memo[nboard] = current_score
             else:
-                scored_moves[move] = memo[nboard]
-
-        if scored_moves:
-            best_score = max(scored_moves.values())
-            best_move  = max(scored_moves, key=scored_moves.get)
+                current_score = memo[nboard]
+            
+            if best_score is None:
+                best_score = current_score
+                best_move = move
+            else:
+                if current_score > best_score:
+                    best_score = current_score
+                    best_move = move
+            
 
     else:
         for move in board.black_possible_moves():
-
             if move[1][0] == 1:
                 return -99999, move
 
@@ -89,15 +91,18 @@ def computer_minimax(board, depth, maximizing, memo):
 
             if nboard not in memo.keys():
                 current_score, _ = computer_minimax(nboard, depth-1, True, memo)
-                scored_moves[move] = current_score
                 memo[nboard] = current_score
             else:
-                scored_moves[move] = memo[nboard]
+                current_score = memo[nboard]
 
-        if scored_moves:
-            best_score = min(scored_moves.values())
-            best_move  = min(scored_moves, key=scored_moves.get)
-    
+            if best_score is None:
+                best_score = current_score
+                best_move = move
+            else:
+                if current_score < best_score:
+                    best_score = current_score
+                    best_move = move
+
     return best_score, best_move
 
 
