@@ -56,9 +56,9 @@ def computer_minimax(board, depth, alpha, beta, maximizing, memo):
         return evaluation(board), None
     
     best_move = None
-    best_score = None
 
     if maximizing:
+        best_score = -10000
         for move in board.white_possible_moves():
             if move[1][0] == board.lines:
                 return 99999, move
@@ -72,24 +72,17 @@ def computer_minimax(board, depth, alpha, beta, maximizing, memo):
             else:
                 current_score = memo[nboard]
             
-            if best_score is None:
+            if current_score > best_score:
                 best_score = current_score
                 best_move = move
-            else:
-                if current_score > best_score:
-                    best_score = current_score
-                    best_move = move
             
-            if alpha is None:
-                alpha = best_score
-            else:
-                alpha = max(best_score, alpha)
+            alpha = max(best_score, alpha)
             
-            if not beta is None:
-                if alpha >= beta:
-                    break
+            if alpha >= beta:
+                break
                 
     else:
+        best_score = 10000
         for move in board.black_possible_moves():
             if move[1][0] == 1:
                 return -99999, move
@@ -103,22 +96,14 @@ def computer_minimax(board, depth, alpha, beta, maximizing, memo):
             else:
                 current_score = memo[nboard]
 
-            if best_score is None:
+            if current_score < best_score:
                 best_score = current_score
                 best_move = move
-            else:
-                if current_score < best_score:
-                    best_score = current_score
-                    best_move = move
 
-            if beta is None:
-                beta = best_score
-            else:
-                beta = min(best_score, beta)
+            beta = min(best_score, beta)
             
-            if not alpha is None:
-                if alpha >= beta:
-                    break
+            if alpha >= beta:
+                break
 
     return best_score, best_move
 
@@ -129,7 +114,7 @@ board.display()
 
 while True:
 
-    s, move = computer_minimax(board, 2, None, None, True, {})
+    s, move = computer_minimax(board, 2, -10000, 10000, True, {})
 
     print(str(move) + " : " + str(s))
 
