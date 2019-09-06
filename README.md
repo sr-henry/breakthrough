@@ -2,7 +2,7 @@
  SI202 : Resolução de Problemas I
 
 
-## Trabalho 1 (individual).
+## Trabalho 1 (individual)
 Cada aluno será responsável por analisar o jogo de breakthrough e criar 10 estratégias para verificar se consegue vencer a partida contra um adversário que joga ao acaso. As estratégias podem ser simples e baseadas simplesmente em heurísticas, o seu objetivo é garantir que entende bem o que funciona e o que não funciona no jogo. Por exemplo, algumas estratégias podem ser:
 
 1. Mover sempre o jogador da frente. 
@@ -13,7 +13,7 @@ Cada aluno será responsável por analisar o jogo de breakthrough e criar 10 est
 O que você deverá fazer é implementar programas com alguma dessas estratégias e analisar esses programas. Você deverá implementar o seu programa em um kernel no jupyter e adicionar as suas análises no próprio kernel. Desse modo, ao compartilhar com o professor o seu kernel, ele poderá ver as suas análises e o seus códigos.
 
 
-## Players
+## Players (strategies.py)
 * __dump_player__ : calculate the square values of the board, perform a move that tries to get a square with the highest value
 
 * __evil_player__ : calculates the game score by the evaluation function, performing the move that gets the highest score in that state
@@ -33,4 +33,12 @@ O que você deverá fazer é implementar programas com alguma dessas estratégia
 * __conn_player__ : calculates the connectivity of the pieces by performing the movement that will assign a higher connectivity value
 
 * __sup_player__ : check if the destination house is defended by allies, if it is, performes the move
+
+
+![results](https://user-images.githubusercontent.com/37659078/64434318-adbc9580-d096-11e9-9ff3-1b888b7942d4.png)
+
+## Minimax 
+- [x] alpha-beta pruning
+- [x] dynamic programming
+- [ ] improve evaluation function
 
