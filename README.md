@@ -34,7 +34,7 @@ O que você deverá fazer é implementar programas com alguma dessas estratégia
 
 * __sup_player__ : check if the destination house is defended by allies, if it is, performes the move
 
-
+### 100 match results
 ![results](https://user-images.githubusercontent.com/37659078/64434318-adbc9580-d096-11e9-9ff3-1b888b7942d4.png)
 
 ## Minimax 
