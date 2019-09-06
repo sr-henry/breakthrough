@@ -89,8 +89,6 @@ def computer_minimax(board, depth, alpha, beta, maximizing, memo):
                 if alpha >= beta:
                     break
                 
-            
-
     else:
         for move in board.black_possible_moves():
             if move[1][0] == 1:
