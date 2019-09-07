@@ -212,11 +212,21 @@ class Board:
         self.black_positions = new_black
         self.board_turn *= -1
 
-    def simulate_move(self, move):
-        b = Board(self.lines, self.columns)
-        b.white_positions.clear()
-        b.white_positions = self.white_positions
-        b.black_positions.clear()
-        b.black_positions = self.black_positions
-        b.perform_white_move(move)
-        return b
+    
+    def serialize_board(self):
+        serialized_board = ""
+        empty_spaces = 0
+        for i in range(1, self.lines+1):
+            for j in range(1, self.columns+1):
+                if (i,j) not in self.white_positions and (i,j) not in self.black_positions:
+                    empty_spaces += 1
+                elif empty_spaces != 0:
+                    serialized_board += str(empty_spaces)
+                    empty_spaces = 0
+                if (i,j) in self.white_positions:
+                    serialized_board += 'w'
+                elif (i,j) in self.black_positions:
+                    serialized_board += 'b'
+               
+        return serialized_board
+    

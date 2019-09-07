@@ -66,11 +66,13 @@ def computer_minimax(board, depth, alpha, beta, maximizing, memo):
             nboard = copy.deepcopy(board)
             nboard.perform_white_move(move)
 
-            if nboard not in memo.keys():
+            nboard_key = nboard.serialize_board()
+
+            if nboard_key not in memo.keys():
                 current_score, _ = computer_minimax(nboard, depth-1, alpha, beta, False, memo)
-                memo[nboard] = current_score
+                memo[nboard_key] = current_score
             else:
-                current_score = memo[nboard]
+                current_score = memo[nboard_key]
             
             if current_score > best_score:
                 best_score = current_score
@@ -90,11 +92,13 @@ def computer_minimax(board, depth, alpha, beta, maximizing, memo):
             nboard = copy.deepcopy(board)
             nboard.perform_black_move(move)
 
-            if nboard not in memo.keys():
+            nboard_key = nboard.serialize_board()
+
+            if nboard_key not in memo.keys():
                 current_score, _ = computer_minimax(nboard, depth-1, alpha, beta, True, memo)
-                memo[nboard] = current_score
+                memo[nboard_key] = current_score
             else:
-                current_score = memo[nboard]
+                current_score = memo[nboard_key]
 
             if current_score < best_score:
                 best_score = current_score
